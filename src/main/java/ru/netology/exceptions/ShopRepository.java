@@ -23,7 +23,12 @@ public class ShopRepository {
      * Метод добавления товара в репозиторий
      * @param product — добавляемый товар
      */
-    public void add(Product product) {
+    public void add(Product product) throws AlreadyExistsException {
+        for (Product item : products) {
+            if (item.getId() == product.getId()) {
+                throw new AlreadyExistsException("Товар с ID " + product.getId() + " уже есть в репозитории");
+            }
+        }
         products = addToArray(products, product);
     }
 
@@ -44,7 +49,7 @@ public class ShopRepository {
     public void removeById(int id) {
         Product productToRemove = findById(id);
         if (productToRemove == null) {
-            throw new NotFoundException("Продукт с id: " + id + " не найден.");
+            throw new NotFoundException("Продукт с ID: " + id + " не найден.");
         }
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;

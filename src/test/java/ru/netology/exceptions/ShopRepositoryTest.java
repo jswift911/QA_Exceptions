@@ -35,4 +35,26 @@ public class ShopRepositoryTest {
         });
     }
 
+    // 3) Тест успешное добавление товара
+
+    @Test
+    void shouldAddProduct() {
+        Product product3 = new Product(3, "Product 3", 30_000);
+        repository.add(product3);
+
+        Product[] expected= {product1, product2, product3};
+        Product[] actual = repository.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // 4) Тест на генерацию AlreadyExistsException при попытке добавить элемент с повторяющимся ID
+
+    @Test
+    void shouldThrowAlreadyExistsExceptionWhenAddExistsId() {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repository.add(product1);
+        });
+    }
 }
+
+
