@@ -42,7 +42,7 @@ public class ShopRepositoryTest {
         Product product3 = new Product(3, "Product 3", 30_000);
         repository.add(product3);
 
-        Product[] expected= {product1, product2, product3};
+        Product[] expected = {product1, product2, product3};
         Product[] actual = repository.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
