@@ -22,7 +22,8 @@ public class ShopRepositoryTest {
     public void shouldRemoveExistingProduct() {
         repository.removeById(1);
         Product[] expected = {product2};
-        Assertions.assertArrayEquals(expected, repository.findAll());
+        Product[] actual = repository.findAll();
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     // 2) Тест на генерацию исключения NotFoundException при попытке удаления несуществующего товара
